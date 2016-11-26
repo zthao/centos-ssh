@@ -138,7 +138,7 @@ RUN rm -rf /etc/ld.so.cache \
 	; rm -rf /{root,tmp,var/cache/{ldconfig,yum}}/* \
 	; > /etc/sysconfig/i18n
 
-EXPOSE 22
+EXPOSE 22 15441 43110
 
 # -----------------------------------------------------------------------------
 # Set default environment variables
