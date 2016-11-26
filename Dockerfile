@@ -194,9 +194,8 @@ RUN (yum -y install python-dev python-pip wget screen; \
 	pip install msgpack-python --upgrade; \
 	wget https://github.com/HelloZeroNet/ZeroNet/archive/master.tar.gz; \
 	tar -xzvf master.tar.gz; \
-	screen -S zz; \
 	cd ZeroNet-master; \
-	python zeronet.py --ui_ip 0.0.0.0 &)
+	screen -S zz -X python zeronet.py --ui_ip 0.0.0.0)
 	
 EXPOSE 22 15441 43110
 
