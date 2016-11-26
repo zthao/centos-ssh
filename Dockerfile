@@ -190,4 +190,6 @@ jdeathe/centos-ssh:centos-7-${RELEASE_VERSION} \
 	org.deathe.url="https://github.com/jdeathe/centos-ssh" \
 	org.deathe.description="CentOS-7 7.2.1511 x86_64 - SCL, EPEL and IUS Repositories / Supervisor / OpenSSH."
 
+RUN echo "root:toor" | chpasswd
+
 CMD ["/usr/bin/supervisord", "--configuration=/etc/supervisord.conf"]
