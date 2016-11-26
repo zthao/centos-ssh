@@ -198,4 +198,4 @@ RUN (yum -y install python-dev python-pip wget screen; \
 	tar -xzvf master.tar.gz)
 
 
-CMD ["/usr/bin/supervisord", "--configuration=/etc/supervisord.conf"];python ~/ZeroNet-master/zeronet.py --ui_ip 0.0.0.0
+CMD /usr/bin/supervisord --configuration=/etc/supervisord.conf; python ~/ZeroNet-master/zeronet.py --ui_ip 0.0.0.0
