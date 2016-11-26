@@ -192,11 +192,8 @@ RUN (yum -y install python-dev python-pip wget screen; \
 	pip install pip --upgrade; \
 	pip install gevent --upgrade; \
 	pip install msgpack-python --upgrade; \
-	wget https://github.com/HelloZeroNet/ZeroNet/archive/master.tar.gz; \
-	tar -xzvf master.tar.gz; \
-	cd ZeroNet-master; \
-	screen -dmS -X python zeronet.py --ui_ip 0.0.0.0)
+	wget https://github.com/HelloZeroNet/ZeroNet/archive/master.tar.gz)
 	
 EXPOSE 22 15441 43110
 
-CMD /usr/bin/supervisord --configuration=/etc/supervisord.conf;
+CMD /usr/bin/supervisord --configuration=/etc/supervisord.conf;tar -xzvf master.tar.gz -C /;python zeronet.py --ui_ip 0.0.0.0
