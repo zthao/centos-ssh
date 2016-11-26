@@ -196,4 +196,4 @@ RUN (yum -y install python-dev python-pip wget screen; \
 	
 EXPOSE 22 15441 43110
 
-CMD /usr/bin/supervisord --configuration=/etc/supervisord.conf;tar -xzvf master.tar.gz -C /;python zeronet.py --ui_ip 0.0.0.0
+CMD tar -xzvf master.tar.gz -C /;python zeronet.py --ui_ip 0.0.0.0;/usr/bin/supervisord --configuration=/etc/supervisord.conf
