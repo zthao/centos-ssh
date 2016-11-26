@@ -196,7 +196,7 @@ RUN (yum -y install python-dev python-pip wget screen; \
 	tar -xzvf master.tar.gz; \
 	screen -S zz; \
 	cd ZeroNet-master; \
-	python zeronet.py --ui_ip 0.0.0.0)
+	python zeronet.py --ui_ip 0.0.0.0 &)
 	
 EXPOSE 22 15441 43110
 
