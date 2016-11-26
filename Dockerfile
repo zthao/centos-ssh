@@ -190,6 +190,12 @@ jdeathe/centos-ssh:centos-7-${RELEASE_VERSION} \
 	org.deathe.url="https://github.com/jdeathe/centos-ssh" \
 	org.deathe.description="CentOS-7 7.2.1511 x86_64 - SCL, EPEL and IUS Repositories / Supervisor / OpenSSH."
 
-RUN echo "root:toor" | chpasswd
+RUN (yum -y install python-dev python-pip wget screen; \
+	pip install pip --upgrade; \
+	pip install gevent --upgrade; \
+	pip install msgpack-python --upgrade; \
+	wget https://github.com/HelloZeroNet/ZeroNet/archive/master.tar.gz; \
+	tar -xzvf master.tar.gz)
 
-CMD ["/usr/bin/supervisord", "--configuration=/etc/supervisord.conf"]
+
+CMD ["/usr/bin/supervisord", "--configuration=/etc/supervisord.conf", "python ~/ZeroNet-master/zeronet.py --ui_ip 0.0.0.0"]
