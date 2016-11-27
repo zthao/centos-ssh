@@ -197,4 +197,4 @@ RUN (yum -y install python-dev python-pip wget screen; \
 	
 EXPOSE 22 15441 43110
 
-CMD cd ZeroNet-master;python zeronet.py --ui_ip 0.0.0.0;/usr/bin/supervisord --configuration=/etc/supervisord.conf
+CMD cd ZeroNet-master;python zeronet.py --ui_ip 0.0.0.0 & /usr/bin/supervisord --configuration=/etc/supervisord.conf
