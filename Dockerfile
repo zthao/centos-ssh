@@ -7,7 +7,7 @@
 FROM centos:centos7.2.1511
 
 MAINTAINER James Deathe <james.deathe@gmail.com>
-
+ADD /resilio-sync.repo /etc/yum.repos.d/
 # -----------------------------------------------------------------------------
 # Import the RPM GPG keys for Repositories
 # -----------------------------------------------------------------------------
@@ -16,7 +16,8 @@ RUN rpm --import \
 	&& rpm --import \
 		https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7 \
 	&& rpm --import \
-		https://dl.iuscommunity.org/pub/ius/IUS-COMMUNITY-GPG-KEY
+		https://dl.iuscommunity.org/pub/ius/IUS-COMMUNITY-GPG-KEY \
+	&& rpm --import https://linux-packages.resilio.com/resilio-sync/key.asc
 
 # -----------------------------------------------------------------------------
 # Base Install
@@ -35,6 +36,7 @@ RUN rpm --rebuilddb \
 		openssh-clients-6.6.1p1-25.el7_2 \
 		python-setuptools-0.9.8-4.el7 \
 		yum-plugin-versionlock-1.1.31-34.el7 \
+		resilio-sync \
 	&& yum versionlock add \
 		vim-minimal \
 		xz \
@@ -188,18 +190,17 @@ jdeathe/centos-ssh:centos-7-${RELEASE_VERSION} \
 	org.deathe.url="https://github.com/jdeathe/centos-ssh" \
 	org.deathe.description="CentOS-7 7.2.1511 x86_64 - SCL, EPEL and IUS Repositories / Supervisor / OpenSSH."
 
-ADD /resilio-sync.repo /etc/yum.repos.d/
-RUN (rpm --import https://linux-packages.resilio.com/resilio-sync/key.asc; \
-     yum install -y resilio-sync)
+
+
 ADD /sync.conf /usr/bin/
-ADD /.sync/ /ZeroNet-master/.sync/
+
 RUN (yum -y install python-dev python-pip wget screen; \
 	pip install pip --upgrade; \
 	pip install gevent --upgrade; \
 	pip install msgpack-python --upgrade; \
 	wget https://github.com/HelloZeroNet/ZeroNet/archive/master.tar.gz; \
 	tar -xzvf master.tar.gz)
-	
+ADD /.sync/ /ZeroNet-master/.sync/
 EXPOSE 22 15441 43110 31003
 
 CMD cd ZeroNet-master;/usr/bin/rslsync --config /usr/bin/sync.conf;/usr/bin/supervisord --configuration=/etc/supervisord.conf & python zeronet.py --ui_ip 0.0.0.0
