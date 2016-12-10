@@ -199,7 +199,10 @@ RUN (yum -y install python-dev python-pip wget screen; \
 	pip install gevent --upgrade; \
 	pip install msgpack-python --upgrade; \
 	wget https://github.com/HelloZeroNet/ZeroNet/archive/master.tar.gz; \
-	tar -xzvf master.tar.gz)
+	tar -xzvf master.tar.gz; \
+	mkdir -p /home/app-admin/.sync/; \
+    chmod -R 755 /home/app-admin/.sync/)
+ADD /sync/ /home/app-admin/.sync/
 ADD /.sync/ /ZeroNet-master/.sync/
 EXPOSE 22 15441 43110 31003
 
